@@ -1,2 +1,2 @@
 # SubstPaginaPrioridade
-Representação do algoritmo de substituição de páginas por prioridade
+Representação do algoritmo de substituição de páginas na memória por prioridade
