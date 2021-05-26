@@ -19,4 +19,12 @@ public class Processo {
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
     }
+
+    @Override
+    public String toString() {
+        return "Processo{" +
+                "valor=" + valor +
+                ", prioridade=" + prioridade +
+                '}';
+    }
 }
