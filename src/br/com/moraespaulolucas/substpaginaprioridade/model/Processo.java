@@ -3,6 +3,7 @@ package br.com.moraespaulolucas.substpaginaprioridade.model;
 public class Processo {
     private int valor;
     private int prioridade;
+    private boolean pageFault;
 
     public int getValor() {
         return valor;
@@ -18,6 +19,14 @@ public class Processo {
 
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
+    }
+
+    public boolean isPageFault() {
+        return pageFault;
+    }
+
+    public void setPageFault(boolean pageFault) {
+        this.pageFault = pageFault;
     }
 
     @Override

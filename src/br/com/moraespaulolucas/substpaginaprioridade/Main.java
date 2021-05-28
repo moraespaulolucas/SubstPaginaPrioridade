@@ -1,6 +1,7 @@
 package br.com.moraespaulolucas.substpaginaprioridade;
 
 import br.com.moraespaulolucas.substpaginaprioridade.model.Processo;
+import br.com.moraespaulolucas.substpaginaprioridade.model.Teste;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class Main {
                 if (processoInd.getValor() == processoAux.getValor()) {
                     igual = true;
                     processoInd.setPrioridade(processoAux.getPrioridade());
-                    continue;
+                    break;
                 }
             }
             if (!igual) {
@@ -38,8 +39,43 @@ public class Main {
                 processoInd.setPrioridade(sc.nextInt());
             }
         }
-        for (Processo p: referencia) {
-            System.out.println(p.toString());
+
+        int qtdFrames;
+        List<List<Processo>> memoria = new ArrayList<>();
+
+        System.out.printf("Indique a quantidade de frames da memória: ");
+        qtdFrames = sc.nextInt();
+        for (int i = 0; i < qtdFrames; i++) {
+            List<Processo> frame = new ArrayList<>();
+            memoria.add(frame);
+        }
+
+        for (Processo procRef: referencia) {
+            int indRef = referencia.indexOf(procRef);
+            for (List<Processo> frame: memoria) {
+                int indFrm = memoria.indexOf(frame);
+                if (frame.isEmpty()) {
+                    if(indFrm > 0) {
+                        for (int i = 0; i <= indRef; i++) {
+                            frame.add(null);
+                        }
+                        break;
+                    }
+                    frame.add(procRef);
+                } else {
+                    frame.add(procRef);
+                }
+            }
+        }
+
+        Teste teste = new Teste();
+
+        System.out.println("Referência");
+        teste.lista(referencia);
+
+        for (List<Processo> frame: memoria) {
+            System.out.println("Frame" +memoria.indexOf(frame));
+            teste.lista(frame);
         }
     }
 }
