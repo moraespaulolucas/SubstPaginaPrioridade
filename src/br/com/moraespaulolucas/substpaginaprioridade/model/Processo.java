@@ -6,11 +6,6 @@ public class Processo {
     private boolean pageFault = false;
     private boolean onMemory = false;
 
-    public Processo() {
-        this.valor = valor;
-        this.prioridade = prioridade;
-    }
-
     public int getValor() {
         return valor;
     }

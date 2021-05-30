@@ -15,4 +15,16 @@ public class Teste {
         }
         System.out.println();
     }
+     public void pageFault(List<Processo> lista) {
+        System.out.printf("|");
+        for (Processo processo: lista) {
+             if (processo.isPageFault()) {
+                 System.out.printf(" F");
+             } else {
+                 System.out.printf(" -");
+             }
+             System.out.printf(" |");
+        }
+        System.out.println();
+     }
 }

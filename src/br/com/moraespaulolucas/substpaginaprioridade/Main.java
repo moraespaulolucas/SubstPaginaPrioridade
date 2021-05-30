@@ -52,55 +52,59 @@ public class Main {
 
         for (Processo procRef: referencia) {
             int indRef = referencia.indexOf(procRef);
-            int indFrm, indFrmAux = 0;
             int prioridade = procRef.getPrioridade();
+            int indFrm, indFrmAux = referencia.size();
+
             Processo procAux;
 
-            for (List<Processo> frame: memoria) {
-                indFrm = memoria.indexOf(frame);
-
-                if (frame.isEmpty()) {
+            if (indRef == 0 ) {
+                for (List<Processo> frame: memoria) {
                     if (procRef.isPageFault()) {
-                        Processo procNull = new Processo();
-                        frame.add(procNull);
+                        frame.add(null);
                         continue;
                     }
                     procRef.setPageFault(true);
                     frame.add(procRef);
-                    indFrmAux = indFrm;
-                    continue;
                 }
+            } else {
+                for (List<Processo> frame: memoria) {
+                    indFrm = memoria.indexOf(frame);
+                    procAux = frame.get(indRef - 1);
 
-                procAux = frame.get(indRef - 1);
-
-                if (procRef.getValor() == procAux.getValor()) {
-                    procRef.setOnMemory(true);
-                    frame.add(procRef);
-                    indFrmAux = indFrm;
-                    break;
-                }
-
-                if (procAux.getPrioridade() < prioridade) {
-                    prioridade = procAux.getPrioridade();
-                    indFrmAux = indFrm;
-                }
-            }
-
-            for (List<Processo> frame: memoria) {
-                indFrm = memoria.indexOf(frame);
-
-                if (indFrm == 0) { break; }
-
-                procAux = frame.get(indRef - 1);
-
-                if (indFrm == indFrmAux) {
-                    if (!procRef.isOnMemory()) {
+                    if (procAux == null) {
                         procRef.setPageFault(true);
+                        procRef.setOnMemory(true);
                         frame.add(procRef);
+                        indFrmAux = indFrm;
+                        break;
+                    } else {
+                        if (procRef.getValor() == procAux.getValor()) {
+                            procRef.setOnMemory(true);
+                            frame.add(procRef);
+                            indFrmAux = indFrm;
+                            break;
+                        }
+
+                        if (procAux.getPrioridade() <= prioridade) {
+                            prioridade = procAux.getPrioridade();
+                            indFrmAux = indFrm;
+                        }
                     }
-                    continue;
                 }
-                frame.add(procAux);
+
+                for (List<Processo> frame: memoria) {
+                    indFrm = memoria.indexOf(frame);
+                    procAux = frame.get(indRef - 1);
+
+                    if (indFrm == indFrmAux) {
+                        if (!procRef.isOnMemory()) {
+                            procRef.setPageFault(true);
+                            frame.add(procRef);
+                        }
+                        continue;
+                    }
+                    frame.add(procAux);
+                }
             }
         }
 
@@ -111,5 +115,7 @@ public class Main {
             System.out.println("Frame " +memoria.indexOf(frame));
             teste.lista(frame);
         }
+        System.out.println("Falta de página");
+        teste.pageFault(referencia);
     }
 }
