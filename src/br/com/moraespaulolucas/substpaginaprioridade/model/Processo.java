@@ -1,9 +1,12 @@
 package br.com.moraespaulolucas.substpaginaprioridade.model;
 
+import java.util.Objects;
+
 public class Processo {
     private int valor;
     private int prioridade;
     private boolean pageFault;
+    private boolean onMemory = false;
 
     public int getValor() {
         return valor;
@@ -29,11 +32,21 @@ public class Processo {
         this.pageFault = pageFault;
     }
 
-    @Override
+    public boolean isOnMemory() {
+        return onMemory;
+    }
+
+    public void setOnMemory(boolean onMemory) {
+        this.onMemory = onMemory;
+    }
+
+
+
+    /*@Override
     public String toString() {
         return "Processo{" +
                 "valor=" + valor +
                 ", prioridade=" + prioridade +
                 '}';
-    }
+    }*/
 }

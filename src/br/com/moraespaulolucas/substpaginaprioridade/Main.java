@@ -52,7 +52,26 @@ public class Main {
 
         for (Processo procRef: referencia) {
             int indRef = referencia.indexOf(procRef);
+            int indRefAux = referencia.indexOf(procRef) - 1;
+            boolean empty = false;
             for (List<Processo> frame: memoria) {
+                if (frame.isEmpty()) {
+                    if (procRef.isOnMemory()) {
+                        frame.add(null);
+                        continue;
+                    }
+                    procRef.setOnMemory(true);
+                    procRef.setPageFault(true);
+                    frame.add(procRef);
+                } else {
+
+                }
+
+            }
+
+            /*for (List<Processo> frame: memoria) {
+
+
                 int indFrm = memoria.indexOf(frame);
                 if (frame.isEmpty()) {
                     if(indFrm > 0) {
@@ -61,11 +80,21 @@ public class Main {
                         }
                         break;
                     }
+                    procRef.setPageFault(true);
+                    procRef.setOnMemory(true);
                     frame.add(procRef);
                 } else {
-                    frame.add(procRef);
+                    if (frame.get(indRef-1).getValor() == procRef.getValor()) {
+                        procRef.setPageFault(false);
+                        frame.add(procRef);
+                    } else {
+
+                    }
+
                 }
-            }
+
+
+            }*/
         }
 
         Teste teste = new Teste();
