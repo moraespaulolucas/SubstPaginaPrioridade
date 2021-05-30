@@ -1,12 +1,15 @@
 package br.com.moraespaulolucas.substpaginaprioridade.model;
 
-import java.util.Objects;
-
 public class Processo {
     private int valor;
     private int prioridade;
-    private boolean pageFault;
+    private boolean pageFault = false;
     private boolean onMemory = false;
+
+    public Processo() {
+        this.valor = valor;
+        this.prioridade = prioridade;
+    }
 
     public int getValor() {
         return valor;
@@ -40,13 +43,4 @@ public class Processo {
         this.onMemory = onMemory;
     }
 
-
-
-    /*@Override
-    public String toString() {
-        return "Processo{" +
-                "valor=" + valor +
-                ", prioridade=" + prioridade +
-                '}';
-    }*/
 }
